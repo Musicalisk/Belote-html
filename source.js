@@ -17,21 +17,22 @@ var playerStart = 1;
 var randomCard;
 window.onload = gameSetup();
 function gameSetup(){
-    alert(1);
+    alert('gS1');
     startUpOne();
     if(redo == 1){
         clearVars();
         gameSetup();
     }
-    alert(2);
+    alert('gS2');
     startUpTwo();
     if(redo == 1){
         clearVars();
         gameSetup();
     }
-    alert(3);
+    alert('gS3');
     roundStart();
 }
+// clears variables incase of a incident
 function clearVars(){
     remove;
     playerContractCard;
@@ -56,6 +57,7 @@ function clearVars(){
 function startUpOne(){
     possibleDraw = CARDS.toSpliced(32, 1);
     alert('sUO1');
+    // draw three cards for each player
     for(let i1 = 0; i1 < 4; i1++){
         for(let i2 = 0; i2 < 3; i2++){
             randomCard = Math.floor(Math.random() * possibleDraw.length);
@@ -98,34 +100,36 @@ function startUpOne(){
     }
     console.log(player1 + ' | ' + player2 + ' | ' + player3 + ' | ' + player4);
     alert('sUO2');
+    // draw two cards for each player
     for(let i3 = 0; i3 < 4; i3++){
         for(let i4 = 0; i4 < 2; i4++){
-            cardDraw.push(possibleDraw[Math.floor(Math.random() * possibleDraw.length)]);
+            randomCard = Math.floor(Math.random() * possibleDraw.length);
+            cardDraw.push(possibleDraw[randomCard]);
             switch(i3){
                 case 0:
-                    player1.push(cardDraw);
-                    remove = possibleDraw.lastIndexOf(cardDraw);
+                    player1.push(...cardDraw);
+                    remove = possibleDraw.lastIndexOf(randomCard);
                     possibleDraw.splice(remove, 1);
                     cardDraw.pop();
                     drawCounter++;
                     break;
                 case 1:
-                    player2.push(cardDraw);
-                    remove = possibleDraw.lastIndexOf(cardDraw);
+                    player2.push(...cardDraw);
+                    remove = possibleDraw.lastIndexOf(randomCard);
                     possibleDraw.splice(remove, 1);
                     cardDraw.pop();
                     drawCounter++;
                     break;
                 case 2:
-                    player3.push(cardDraw);
-                    remove = possibleDraw.lastIndexOf(cardDraw);
+                    player3.push(...cardDraw);
+                    remove = possibleDraw.lastIndexOf(randomCard);
                     possibleDraw.splice(remove, 1);
                     cardDraw.pop();
                     drawCounter++;
                     break;
                 case 3:
-                    player4.push(cardDraw);
-                    remove = possibleDraw.lastIndexOf(cardDraw);
+                    player4.push(...cardDraw);
+                    remove = possibleDraw.lastIndexOf(randomCard);
                     possibleDraw.splice(remove, 1);
                     cardDraw.pop();
                     drawCounter++;
@@ -136,8 +140,11 @@ function startUpOne(){
             }
         }
     }
-    cardDraw.push(possibleDraw[Math.floor(Math.random() * possibleDraw.length)]);
-    drawCounter = 0;
+    console.log(player1 + ' | ' + player2 + ' | ' + player3 + ' | ' + player4);
+    alert('sUO3');
+    // draw card for possible contract; then vote for round 1 & round 2 of contract voting through functions
+    randomCard = Math.floor(Math.random() * possibleDraw.length);
+    cardDraw.push(possibleDraw[randomCard]);
     let possibleContract = cardDraw.substr(0, 2);
     do{
         contractChoosing(possibleContract, contractTaken);
@@ -169,6 +176,7 @@ function startUpOne(){
     remove = possibleDraw.findIndex(cardDraw);
     possibleDraw.splice(remove, 1);
 }
+// function for contract voting
 function contractChoosing(a, b){
     var contCounter = 1;
     let vote;
@@ -235,6 +243,7 @@ function contractChoosing(a, b){
         }
     }
 }
+// function used to determine votes; add html element to manipulate in future
 function voteContract(c, b, d){
     let vote = document.getElementById('').value;
         if(d == 1){
@@ -246,6 +255,7 @@ function voteContract(c, b, d){
             c = true;
         }
 }
+// deal last three cards for all players and é to the contracted player, then start the round
 function startUpTwo(){
     // switch(contractedPlayer){
     //     case player1:
@@ -265,6 +275,7 @@ function startUpTwo(){
     //         return redo;
     // }
 }
+// starts the 8 tricks for the Round
 function roundStart(){
-    // playerStart goes first then cockwise
+    // playerStart goes first then clockwise
 }
