@@ -1,10 +1,10 @@
 const CARDS = ['trA', 'coA', 'piA', 'caA', 'tr10', 'co10', 'pi10', 'ca10', 'trR', 'coR', 'piR', 'caR', 'trQ', 'coQ', 'piQ', 'caQ', 'trV', 'coV', 'piV', 'caV', 'tr9', 'co9', 'pi9', 'ca9', 'tr8', 'co8', 'pi8', 'ca8', 'tr7', 'co7', 'pi7', 'ca7', 'placeholder'];
 var remove;
 var playerContractCard;
-var cardDraw;
+var cardDraw = [];
 var redo;
 var contract;
-var possibleDraw;
+var possibleDraw = CARDS.toSpliced(32, 1);
 var player1 = [];
 var player2 = [];
 var player3 = [];
@@ -14,6 +14,7 @@ var drawCounter = 0;
 var playerTurn = 1;
 var contractTaken = false;
 var playerStart = 1;
+var randomCard;
 window.onload = gameSetup();
 function gameSetup(){
     alert(1);
@@ -22,13 +23,13 @@ function gameSetup(){
         clearVars();
         gameSetup();
     }
-    // alert(2);
+    alert(2);
     startUpTwo();
     if(redo == 1){
         clearVars();
         gameSetup();
     }
-    // alert(3);
+    alert(3);
     roundStart();
 }
 function clearVars(){
@@ -53,43 +54,37 @@ function clearVars(){
     }
 }
 function startUpOne(){
-    // alert(2);
     possibleDraw = CARDS.toSpliced(32, 1);
-    alert(cardDraw);
-    // work on randomizer for cards
-    cardDraw.push(possibleDraw[Math.floor(Math.random() * possibleDraw.length)]);
-
-    // add line 60 to line 66, 106, and 141!
-    alert(cardDraw);
-    alert(3);
+    alert('sUO1');
     for(let i1 = 0; i1 < 4; i1++){
         for(let i2 = 0; i2 < 3; i2++){
-            // cardDraw.push(possibleDraw[Math.floor(Math.random() * possibleDraw.length)]);
+            randomCard = Math.floor(Math.random() * possibleDraw.length);
+            cardDraw.push(possibleDraw[randomCard]);
             switch(i1){
                 case 0:
-                    player1.push(cardDraw);
-                    remove = possibleDraw.findIndex(cardDraw);
+                    player1.push(...cardDraw);
+                    remove = possibleDraw.lastIndexOf(randomCard);
                     possibleDraw.splice(remove, 1);
                     cardDraw.pop();
                     drawCounter++;
                     break;
                 case 1:
-                    player2.push(cardDraw);
-                    remove = possibleDraw.findIndex(cardDraw);
+                    player2.push(...cardDraw);
+                    remove = possibleDraw.lastIndexOf(randomCard);
                     possibleDraw.splice(remove, 1);
                     cardDraw.pop();
                     drawCounter++;
                     break;
                 case 2:
-                    player3.push(cardDraw);
-                    remove = possibleDraw.findIndex(cardDraw);
+                    player3.push(...cardDraw);
+                    remove = possibleDraw.lastIndexOf(randomCard);
                     possibleDraw.splice(remove, 1);
                     cardDraw.pop();
                     drawCounter++;
                     break;
                 case 3:
-                    player4.push(cardDraw);
-                    remove = possibleDraw.findIndex(cardDraw);
+                    player4.push(...cardDraw);
+                    remove = possibleDraw.lastIndexOf(randomCard);
                     possibleDraw.splice(remove, 1);
                     cardDraw.pop();
                     drawCounter++;
@@ -101,34 +96,36 @@ function startUpOne(){
             }
         }
     }
+    console.log(player1 + ' | ' + player2 + ' | ' + player3 + ' | ' + player4);
+    alert('sUO2');
     for(let i3 = 0; i3 < 4; i3++){
         for(let i4 = 0; i4 < 2; i4++){
-            // cardDraw = math.rand();
-            switch(counter){
+            cardDraw.push(possibleDraw[Math.floor(Math.random() * possibleDraw.length)]);
+            switch(i3){
                 case 0:
-                    playerOne.push(cardDraw);
-                    remove = possibleDraw.findIndex(cardDraw);
+                    player1.push(cardDraw);
+                    remove = possibleDraw.lastIndexOf(cardDraw);
                     possibleDraw.splice(remove, 1);
                     cardDraw.pop();
                     drawCounter++;
                     break;
                 case 1:
-                    playerTwo.push(cardDraw);
-                    remove = possibleDraw.findIndex(cardDraw);
+                    player2.push(cardDraw);
+                    remove = possibleDraw.lastIndexOf(cardDraw);
                     possibleDraw.splice(remove, 1);
                     cardDraw.pop();
                     drawCounter++;
                     break;
                 case 2:
-                    playerThree.push(cardDraw);
-                    remove = possibleDraw.findIndex(cardDraw);
+                    player3.push(cardDraw);
+                    remove = possibleDraw.lastIndexOf(cardDraw);
                     possibleDraw.splice(remove, 1);
                     cardDraw.pop();
                     drawCounter++;
                     break;
                 case 3:
-                    playerFour.push(cardDraw);
-                    remove = possibleDraw.findIndex(cardDraw);
+                    player4.push(cardDraw);
+                    remove = possibleDraw.lastIndexOf(cardDraw);
                     possibleDraw.splice(remove, 1);
                     cardDraw.pop();
                     drawCounter++;
@@ -139,7 +136,7 @@ function startUpOne(){
             }
         }
     }
-    // cardDraw = math.rand();
+    cardDraw.push(possibleDraw[Math.floor(Math.random() * possibleDraw.length)]);
     drawCounter = 0;
     let possibleContract = cardDraw.substr(0, 2);
     do{
